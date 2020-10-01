@@ -53,4 +53,11 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.0-alpha05"
 
+    // circular image view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // glide power
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 }
