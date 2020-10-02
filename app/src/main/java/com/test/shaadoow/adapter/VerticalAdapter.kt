@@ -4,11 +4,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.test.shaadoow.AppDelegate
 import com.test.shaadoow.R
+import com.test.shaadoow.ui.viewmodel.ArtistViewModel
+import com.test.shaadoow.ui.viewmodel.MainViewModel
 import com.test.shaadoow.util.Utils
 import kotlinx.android.synthetic.main.item_horizontal.view.*
+import timber.log.Timber
 
 class VerticalAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -88,7 +96,19 @@ class VerticalAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             view.horizontalListView.layoutManager = LinearLayoutManager(
                 view.context, RecyclerView.HORIZONTAL, false
             )
-            val adapter = HorizontalAdapter{}
+            val viewModel = ViewModelProvider(
+                (view.context as AppCompatActivity), ViewModelProvider.AndroidViewModelFactory
+                    .getInstance((view.context as AppCompatActivity).application)
+            ).get(ArtistViewModel::class.java)
+            val adapter = ArtistsListAdapter{
+                viewModel.retry()
+            }
+            viewModel.artists.observe((view.context as AppCompatActivity), Observer {
+                    pagedList -> adapter.submitList(pagedList)
+            })
+            viewModel.networkState.observe((view.context as AppCompatActivity), Observer {
+                    networkState -> adapter.setNetworkState(networkState!!)
+            })
             view.horizontalListView.adapter = adapter
         }
     }

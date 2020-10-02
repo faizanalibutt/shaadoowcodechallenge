@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.test.shaadoow.ui.viewmodel.ArtistDataViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:padding="5dp"
+        app:cardCornerRadius="2dp"
+        android:layout_margin="2.5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/artist_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mutableImage="@{viewModel.getArtistImage()}"/>
+
+            <TextView
+                android:id="@+id/artist_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:minHeight="20dp"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center"
+                android:paddingHorizontal="10dp"
+                android:textSize="@dimen/font_size_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/artist_image"
+                app:layout_constraintBottom_toTopOf="@+id/artist_follow"
+                app:mutableText="@{viewModel.getArtistTitle()}" />
+
+            <TextView
+                android:id="@+id/artist_follow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:minHeight="10dp"
+                android:gravity="center|start"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textSize="@dimen/font_size_tiny"
+                android:drawablePadding="10dp"
+                app:drawableStartCompat="@android:drawable/ic_menu_edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/artist_image"
+                app:layout_constraintStart_toStartOf="@+id/artist_image"
+                app:layout_constraintTop_toBottomOf="@+id/artist_title"
+                app:mutableTextFollow="@{viewModel.getArtistFollowers()}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

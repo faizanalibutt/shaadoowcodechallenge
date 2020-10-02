@@ -47,12 +47,6 @@ class HorizontalAdapter(private val retryCallback: () -> Unit)
     }
 
     override fun getItemViewType(position: Int): Int {
-        /*return when (position) {
-            0 -> TYPE_ARTIST
-            1 -> TYPE_HORIZONTAL
-            2 -> TYPE_FEED
-            else -> TYPE_VERTICAL
-        }*/
         return TYPE_ARTIST
     }
 
